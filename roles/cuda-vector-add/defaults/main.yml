@@ -1,0 +1,5 @@
+namespace: nvidia
+application_name: cuda-vector-add
+container_image_name: docker.io/mirrorgooglecontainers/cuda-vector-add:v0.1
+
+oc_config_file_location: ~/.kube/config

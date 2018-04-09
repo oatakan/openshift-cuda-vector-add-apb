@@ -1,0 +1,25 @@
+---
+- name: deploy cuda-vector-add pod
+  k8s_v1_pod:
+    name: "{{ application_name }}"
+    namespace: "{{ namespace }}"
+    state: present
+    metadata:
+      name: "{{ application_name }}"
+      namespace: "{{ namespace }}"
+    restart_policy: OnFailure
+    spec_template_metadata_labels:
+      name: "{{ application_name }}"
+    containers:
+      - name: "{{ application_name }}"
+        image: "{{ container_image_name }}"
+        env:
+          - name: NVIDIA_VISIBLE_DEVICES
+            value: all
+          - name: NVIDIA_DRIVER_CAPABILITIES
+            value: "compute,utility"
+          - name: NVIDIA_REQUIRE_CUDA
+            value: "cuda>=8.0"
+        resources:
+          limits:
+            nvidia.com/gpu: 1 # requesting 1 GPU

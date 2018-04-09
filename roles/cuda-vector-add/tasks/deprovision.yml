@@ -1,0 +1,6 @@
+---
+- name: remove cuda-vector-add pod
+  k8s_v1_pod:
+    name: "{{ application_name }}"
+    namespace: "{{ namespace }}"
+    state: absent

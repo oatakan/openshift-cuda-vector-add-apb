@@ -1,0 +1,16 @@
+version: 1.0
+name: cuda-vector-add-apb
+description: APB for deploying cuda-vector-add
+bindable: False
+async: optional
+tags:
+  - gpu
+metadata:
+  displayName: cuda-vector-add (APB)
+plans:
+  - name: default
+    metadata:
+      displayName: cuda-vector-add
+      longDescription: Deploy cuda-vector-add
+    description: cuda-vector-add
+    free: True

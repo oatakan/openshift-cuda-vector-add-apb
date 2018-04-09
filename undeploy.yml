@@ -1,0 +1,25 @@
+- name: set up authentication
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  roles:
+    - oatakan.openshift-add-auth-config
+
+- import_playbook: playbooks/deprovision.yml
+
+- name: remove project
+  hosts: localhost
+  gather_facts: false
+  connection: local
+
+  roles:
+    - role: ansible.kubernetes-modules
+      install_python_requirements: no
+
+  post_tasks:
+    - name: delete project
+      openshift_v1_project:
+        name: '{{ namespace }}'
+        state: absent
+      environment:
+        K8S_AUTH_KUBECONFIG: 'config'
