@@ -4,12 +4,10 @@
     name: "{{ application_name }}"
     namespace: "{{ namespace }}"
     state: present
-    metadata:
-      name: "{{ application_name }}"
-      namespace: "{{ namespace }}"
     restart_policy: OnFailure
-    spec_template_metadata_labels:
-      name: "{{ application_name }}"
+    labels:
+      app: "{{ application_name }}"
+      namespace: "{{ namespace }}"
     containers:
       - name: "{{ application_name }}"
         image: "{{ container_image_name }}"
