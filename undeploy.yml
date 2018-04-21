@@ -13,7 +13,7 @@
   connection: local
 
   roles:
-    - role: ansible-kubernetes-modules
+    - role: ansible.ansible-kubernetes-modules
       install_python_requirements: no
 
   post_tasks:
