@@ -1,4 +1,4 @@
-- src: ansible.ansible-kubernetes-modules
+- src: ansible.kubernetes-modules
 
 - src: https://github.com/ansibleplaybookbundle/ansible-asb-modules.git
   version: origin/master

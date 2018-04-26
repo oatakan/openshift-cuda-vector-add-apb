@@ -5,7 +5,7 @@
 
   roles:
     - oatakan.openshift-add-auth-config
-    - role: ansible.ansible-kubernetes-modules
+    - role: ansible.kubernetes-modules
       install_python_requirements: no
 
   post_tasks:
