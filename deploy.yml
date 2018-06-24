@@ -1,4 +1,4 @@
-- name: set up authentication and project
+- name: deploy
   hosts: localhost
   gather_facts: false
   connection: local
@@ -7,12 +7,23 @@
     - oatakan.openshift-add-auth-config
     - role: ansible.kubernetes-modules
       install_python_requirements: no
+    - role: ansibleplaybookbundle.asb-modules
 
   post_tasks:
     - name: create project from namespace
-      openshift_v1_project:
+      openshift_raw:
+        api_version: v1
+        kind: Project
         name: '{{ namespace }}'
+        description: '{{ namespace }}'
+        display_name: '{{ namespace }}'
+        state: present
       environment:
         K8S_AUTH_KUBECONFIG: 'config'
 
-- import_playbook: playbooks/provision.yml
+    - name: deploy apb
+      include_role:
+        name: cuda-vector-add
+      vars:
+        action: provision
+        playbook_debug: false
