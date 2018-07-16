@@ -12,7 +12,8 @@
       include_role:
         name: cuda-vector-add
       vars:
-        apb_action: deprovision
+        action: deprovision
+        playbook_debug: false
 
     - name: delete project
       openshift_raw:
