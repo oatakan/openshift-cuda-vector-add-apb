@@ -1,20 +1,18 @@
-- name: undeploy
+- name: set up authentication and project
   hosts: localhost
   gather_facts: false
   connection: local
+
   roles:
     - oatakan.openshift-add-auth-config
-    - role: ansible.kubernetes-modules
-      install_python_requirements: no
-    - role: ansibleplaybookbundle.asb-modules
+    - ansibleplaybookbundle.asb-modules
 
   post_tasks:
-    - name: undeploy apb
+    - name: undeploy apbs
       include_role:
-        name: deprovision-gogs-apb
+        name: cuda-vector-add
       vars:
-        action: deprovision
-        playbook_debug: false
+        apb_action: deprovision
 
     - name: delete project
       openshift_raw:
