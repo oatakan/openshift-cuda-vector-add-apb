@@ -11,15 +11,16 @@
 
   post_tasks:
     - name: create project from namespace
-      openshift_raw:
+      k8s:
+        name: '{{ namespace }}'
         api_version: v1
         kind: Project
-        name: '{{ namespace }}'
-        description: '{{ namespace }}'
-        display_name: '{{ namespace }}'
+        verify_ssl: no
+        api_key: "{{ api_key }}"
         state: present
       environment:
         K8S_AUTH_KUBECONFIG: 'config'
+
 
     - name: deploy apb
       include_role:
