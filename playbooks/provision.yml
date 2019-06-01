@@ -3,9 +3,6 @@
   gather_facts: false
   connection: local
   roles:
-  - role: ansible.kubernetes-modules
-    install_python_requirements: no
-  - role: ansibleplaybookbundle.asb-modules
-  - role: cuda-vector-add
+  - role: cuda-vector-add-apb
   vars:
-    action: provision
+    apb_action: provision

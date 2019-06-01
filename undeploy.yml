@@ -1,27 +1,26 @@
-- name: set up authentication and project
+- name: undeploy
   hosts: localhost
   gather_facts: false
   connection: local
+  become: no
+
+  pre_tasks:
+    - name: authenticate with cluster
+      include_role:
+        name: oatakan.openshift-add-auth-config
+      vars:
+        oc_auth_type: api
 
   roles:
-    - oatakan.openshift-add-auth-config
-    - role: ansible.kubernetes-modules
-      install_python_requirements: no
-    - role: ansibleplaybookbundle.asb-modules
+    - role: cuda-vector-add-apb
+      apb_action: deprovision
 
   post_tasks:
-    - name: undeploy apbs
-      include_role:
-        name: cuda-vector-add
-      vars:
-        action: deprovision
-        playbook_debug: false
-
     - name: delete project
-      openshift_raw:
+      k8s:
+        name: '{{ namespace }}'
         api_version: v1
         kind: Project
-        name: '{{ namespace }}'
+        validate_certs: no
+        api_key: "{{ api_key }}"
         state: absent
-      environment:
-        K8S_AUTH_KUBECONFIG: 'config'
