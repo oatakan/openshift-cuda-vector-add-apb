@@ -1,2 +1,8 @@
 ---
-- include: "{{ apb_action }}.yml"
+
+- name: "Set pod state={{ state }}"
+  k8s:
+    state: '{{ state }}'
+    definition: "{{ lookup('template', 'pod.yml') | from_yaml }}"
+    validate_certs: no
+    api_key: "{{ api_key }}"

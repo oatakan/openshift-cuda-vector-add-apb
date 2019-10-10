@@ -1,7 +1,13 @@
-namespace: nvidia
-application_name: cuda-vector-add
-container_image_name: docker.io/mirrorgooglecontainers/cuda-vector-add:v0.1
+---
 
-oc_config_file_location: ~/.kube/config
+# Defaults for values we could expect from a broker
+_apb_plan_id: default
+_apb_service_class_id: 0
+_apb_service_instance_id: 0
+
+app_name: "cuda-vector-add-{{ _apb_service_instance_id }}"
+namespace: "{{ lookup('env','NAMESPACE') | default('nvidia', true) }}"
+
+container_image_name: docker.io/mirrorgooglecontainers/cuda-vector-add:v0.1
 
 apb_action: provision
