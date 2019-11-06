@@ -14,7 +14,7 @@
     - name: create project from namespace
       k8s:
         name: '{{ namespace }}'
-        api_version: config.openshift.io/v1
+        api_version: project.openshift.io/v1
         kind: Project
         validate_certs: no
         api_key: "{{ api_key }}"
