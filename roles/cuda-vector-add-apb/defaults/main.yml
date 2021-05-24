@@ -8,6 +8,7 @@ _apb_service_instance_id: 0
 app_name: "cuda-vector-add-{{ _apb_service_instance_id }}"
 namespace: "{{ lookup('env','NAMESPACE') | default('nvidia', true) }}"
 
-container_image_name: docker.io/mirrorgooglecontainers/cuda-vector-add:v0.1
+#container_image_name: docker.io/mirrorgooglecontainers/cuda-vector-add:v0.1
+container_image_name: nvcr.io/nvidia/k8s/cuda-sample:vectoradd-cuda10.2
 
 apb_action: provision
